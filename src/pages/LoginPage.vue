@@ -2,10 +2,10 @@
   <div class="login-container">
     <div class="login-card">
       <div class="logo-section">
-        <h1>打牌积分系统</h1>
+        <h1>打牌记分助手</h1>
         <p>欢迎回来</p>
       </div>
-      
+
       <a-form
         :model="loginForm"
         :rules="loginRules"
@@ -151,11 +151,11 @@ const goToRegister = () => {
   .login-container {
     padding: 16px;
   }
-  
+
   .login-card {
     padding: 24px;
   }
-  
+
   .logo-section h1 {
     font-size: 20px;
   }

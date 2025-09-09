@@ -2,10 +2,10 @@
   <div class="register-container">
     <div class="register-card">
       <div class="logo-section">
-        <h1>打牌积分系统</h1>
+        <h1>打牌记分助手</h1>
         <p>创建新账号</p>
       </div>
-      
+
       <a-form
         :model="registerForm"
         :rules="registerRules"
@@ -61,29 +61,6 @@
           />
         </a-form-item>
 
-        <a-form-item
-          label="邮箱验证码"
-          name="emailCode"
-        >
-          <a-input
-            v-model:value="registerForm.emailCode"
-            placeholder="请输入邮箱验证码"
-            size="large"
-            :prefix="h(SafetyCertificateOutlined)"
-          />
-        </a-form-item>
-
-        <a-form-item
-          label="验证码"
-          name="captchaCode"
-        >
-          <a-input
-            v-model:value="registerForm.captchaCode"
-            placeholder="请输入验证码"
-            size="large"
-            :prefix="h(SafetyCertificateOutlined)"
-          />
-        </a-form-item>
 
         <a-form-item>
           <a-button
@@ -113,8 +90,7 @@ import { message } from 'ant-design-vue'
 import { 
   UserOutlined, 
   LockOutlined, 
-  MailOutlined,
-  SafetyCertificateOutlined 
+  MailOutlined
 } from '@ant-design/icons-vue'
 import { userRegister } from '@/api'
 import type { UserRegisterRequest } from '@/api'
@@ -122,14 +98,11 @@ import type { UserRegisterRequest } from '@/api'
 const router = useRouter()
 const isLoading = ref(false)
 
-const registerForm = reactive<UserRegisterRequest>({
+const registerForm = reactive<Omit<UserRegisterRequest, 'emailCode' | 'captchaCode' | 'captchaId'>>({
   username: '',
   email: '',
   password: '',
-  confirmPassword: '',
-  emailCode: '',
-  captchaCode: '',
-  captchaId: ''
+  confirmPassword: ''
 })
 
 const validatePassword = async (_rule: any, value: string) => {
@@ -167,18 +140,19 @@ const registerRules = {
   confirmPassword: [
     { required: true, validator: validateConfirmPassword, trigger: 'blur' },
   ],
-  emailCode: [
-    { required: true, message: '请输入邮箱验证码', trigger: 'blur' },
-  ],
-  captchaCode: [
-    { required: true, message: '请输入验证码', trigger: 'blur' },
-  ],
 }
 
 const handleRegister = async () => {
   isLoading.value = true
   try {
-    const res = await userRegister(registerForm)
+    // 构造完整的注册请求，为验证码字段提供空字符串默认值
+    const fullRegisterForm: UserRegisterRequest = {
+      ...registerForm,
+      emailCode: '',
+      captchaCode: '',
+      captchaId: ''
+    }
+    const res = await userRegister(fullRegisterForm)
     if (res.data.code === 0) {
       message.success('注册成功！请登录')
       router.push('/login')
@@ -255,12 +229,12 @@ const goToLogin = () => {
   .register-container {
     padding: 16px;
   }
-  
+
   .register-card {
     padding: 24px;
     max-height: 95vh;
   }
-  
+
   .logo-section h1 {
     font-size: 20px;
   }

@@ -1,6 +1,6 @@
-# 打牌积分系统前端
+# 打牌记分助手前端
 
-一个基于 Vue 3 + TypeScript + Ant Design Vue 的打牌积分管理系统前端应用，支持移动端响应式设计。
+一个基于 Vue 3 + TypeScript + Ant Design Vue 的打牌记分助手系统前端应用，支持移动端响应式设计。
 
 ## 功能特性
 

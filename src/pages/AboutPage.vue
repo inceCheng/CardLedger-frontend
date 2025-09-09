@@ -1,7 +1,7 @@
 <template>
   <div id="about" class="about">
-    <h1>关于打牌积分系统</h1>
-    
+    <h1>关于打牌记分助手</h1>
+
     <div class="info-section">
       <h2>系统功能</h2>
       <ul>
@@ -110,11 +110,11 @@
   .about {
     padding: 20px 16px;
   }
-  
+
   .avatar-examples {
     gap: 20px;
   }
-  
+
   .about h1 {
     font-size: 24px;
   }

@@ -5,7 +5,7 @@
         <RouterLink to="/">
           <div class="title-bar">
             <div class="logo">🎮</div>
-            <div class="title">打牌积分</div>
+            <div class="title">打牌记分助手</div>
           </div>
         </RouterLink>
       </a-col>
@@ -24,11 +24,11 @@
             <a-dropdown>
               <a-button type="text" class="user-button">
                 <a-avatar :size="32" :src="getCurrentUserAvatar()">
-                  {{ loginUserStore.loginUser?.displayName?.charAt(0) || 
+                  {{ loginUserStore.loginUser?.displayName?.charAt(0) ||
                       loginUserStore.loginUser?.username?.charAt(0) }}
                 </a-avatar>
                 <span class="username">
-                  {{ loginUserStore.loginUser?.displayName || 
+                  {{ loginUserStore.loginUser?.displayName ||
                       loginUserStore.loginUser?.username }}
                 </span>
                 <DownOutlined />
@@ -82,7 +82,7 @@ import { h, ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { message } from 'ant-design-vue'
 import { HomeOutlined, DownOutlined, LogoutOutlined, EditOutlined } from '@ant-design/icons-vue'
-import { MenuProps } from 'ant-design-vue'
+import type { MenuProps } from 'ant-design-vue'
 import { useLoginUserStore } from '@/stores/useLoginUserStore'
 import { updateUser } from '@/api'
 import type { UserUpdateRequest } from '@/api'
@@ -148,7 +148,7 @@ const getCurrentUserAvatar = () => {
   if (loginUserStore.loginUser?.avatar) {
     return loginUserStore.loginUser.avatar
   }
-  
+
   // 使用默认的当前用户头像
   return '/user_me.png'
 }
@@ -177,7 +177,7 @@ const handleUpdateNickname = async () => {
     const res = await updateUser({
       displayName: nicknameForm.displayName.trim()
     })
-    
+
     if (res.data.code === 0) {
       message.success('昵称修改成功!')
       editNicknameVisible.value = false
@@ -251,15 +251,15 @@ const handleUpdateNickname = async () => {
   .title {
     font-size: 16px;
   }
-  
+
   .username {
     display: none;
   }
-  
+
   .login-buttons {
     gap: 4px;
   }
-  
+
   .login-buttons .ant-btn {
     padding: 4px 8px;
     font-size: 12px;

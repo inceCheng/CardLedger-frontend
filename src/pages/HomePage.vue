@@ -1,12 +1,12 @@
 <template>
   <div class="home-container">
     <div class="welcome-section">
-      <h1>打牌积分系统</h1>
+      <h1>打牌记分助手</h1>
       <p v-if="loginUserStore.isLoggedIn" class="welcome-text">
         欢迎回来，{{ loginUserStore.loginUser?.displayName || loginUserStore.loginUser?.username }}！
       </p>
       <p v-else class="welcome-text">
-        欢迎使用打牌积分系统，请先登录
+        欢迎使用记分助手，请先登录
       </p>
     </div>
 
@@ -136,7 +136,7 @@ const handleJoinRoom = async () => {
   if (!joinRoomForm.roomCode || joinRoomForm.roomCode.length !== 4) {
     return
   }
-  
+
   const room = await roomStore.joinExistingRoom(joinRoomForm)
   if (room) {
     joinRoomVisible.value = false
@@ -227,20 +227,20 @@ const goToRegister = () => {
   .home-container {
     padding: 24px 16px;
   }
-  
+
   .welcome-section h1 {
     font-size: 24px;
   }
-  
+
   .welcome-text {
     font-size: 16px;
   }
-  
+
   .action-cards {
     grid-template-columns: 1fr;
     gap: 16px;
   }
-  
+
   .card-icon {
     height: 60px;
     font-size: 24px;
